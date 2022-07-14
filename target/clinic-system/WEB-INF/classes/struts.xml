@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+    "http://struts.apache.org/dtds/struts-2.5.dtd">
+
+<struts>
+
+    <constant name="struts.devMode" value="true" />
+    <constant name="struts.convention.action.suffix" value="Controller"/>
+    <constant name="struts.convention.action.mapAllMatches" value="true"/>
+    <constant name="struts.convention.default.parent.package" value="rest-default"/>
+    <constant name="struts.convention.package.locators" value="rest"/>
+    <constant name="struts.mapper.class" value="org.apache.struts2.dispatcher.mapper.PrefixBasedActionMapper" />
+    <constant name="struts.mapper.prefixMapping" value="/api:rest,:struts"/>
+    <constant name="struts.rest.namespace" value="/api" />
+    <constant name="struts.rest.content.restrictToGET" value="false"/>
+    
+    <package name="basicstruts2" extends="struts-default">
+        <action name="index">
+            <result>/index.jsp</result>
+        </action>
+
+        <action name="register" class="com.example.proj.action.Register" method="execute">
+            <result name="input">/register.jsp</result>
+            <result name="success">/login.jsp</result>
+            <result name="error">/error.jsp</result>
+            <result name="accountregistered">/admin.jsp</result>
+        </action>
+
+        <action name="login" class="com.example.proj.action.Login" method="execute">
+            <interceptor-ref name="defaultStack"/>
+            <result name="admin">/admin.jsp</result>
+            <result name="veterinarian">/veterinarian.jsp</result>
+            <result name="client">/client.jsp</result>
+            <result name="input">/login.jsp</result>
+            <result name="error">/error.jsp</result>
+        </action>
+
+        <action name="loginToken" class="com.example.proj.action.LoginToken">
+            <result name="success">/welcome.jsp</result>
+            <result name="error">/error.jsp</result>
+        </action>
+
+        
+        <action name="listaccounts" class="com.example.proj.action.Accounts">
+            <interceptor-ref name="defaultStack"/>
+            <result name="success">/accounts.jsp</result>
+        </action>
+
+        <action name="delete" class="com.example.proj.action.Delete" method="execute">
+            <result name="success">/admin.jsp</result>
+            <result name="error">/error.jsp</result>            
+        </action>
+
+    </package>
+
+</struts>
